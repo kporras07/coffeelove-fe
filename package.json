@@ -1,0 +1,30 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.CoffeeLove",
+    "tns-android": {
+      "version": "6.4.1"
+    },
+    "tns-ios": {
+      "version": "6.4.0"
+    }
+  },
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "repository": "<fill-your-repository-here>",
+  "scripts": {
+    "lint": "eslint \"app/**/*.js\""
+  },
+  "dependencies": {
+    "@nativescript/theme": "~2.3.0",
+    "nativescript-ui-sidedrawer": "~8.0.0",
+    "rxjs": "^6.4.0",
+    "tns-core-modules": "~6.4.0"
+  },
+  "devDependencies": {
+    "eslint": "~5.8.0",
+    "nativescript-dev-webpack": "~1.5.0",
+    "node-sass": "^4.7.1"
+  },
+  "gitHead": "d8bdf0799a219051f28f8abd7c258d2bf2fce6e1",
+  "readme": "NativeScript Application"
+}
