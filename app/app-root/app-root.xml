@@ -11,9 +11,8 @@ https://docs.nativescript.org/ui/professional-ui-components/SideDrawer/getting-s
     <nsDrawer:RadSideDrawer.drawerContent>
         <GridLayout rows="auto, *" class="nt-drawer__content">
             <StackLayout class="nt-drawer__header">
-                <Image class="nt-drawer__header-image fas t-36" src="font://&#xf2bd;" />
-                <Label class="nt-drawer__header-brand" text="User Name" />
-                <Label class="nt-drawer__header-footnote" text="username@mail.com" />
+                <Label class="nt-drawer__header-brand" text="Welcome," />
+                <Label class="nt-drawer__header-footnote" text="John Doe" />
             </StackLayout>
 
             <ScrollView row="1">
@@ -55,6 +54,6 @@ https://docs.nativescript.org/ui/professional-ui-components/SideDrawer/getting-s
     </nsDrawer:RadSideDrawer.drawerContent>
 
     <nsDrawer:RadSideDrawer.mainContent>
-        <Frame defaultPage="home/home-page"></Frame>
+        <Frame defaultPage="login/login-page"></Frame>
     </nsDrawer:RadSideDrawer.mainContent>
 </nsDrawer:RadSideDrawer>
