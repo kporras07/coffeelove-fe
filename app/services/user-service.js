@@ -24,7 +24,7 @@ exports.register = (user) => new Promise((resolve, reject) => {
         }
         response.json();
     })
-    .then(this.login(user))
+    .then(resolve)
     .catch((error) => {
         handleErrors(error);
         reject();
