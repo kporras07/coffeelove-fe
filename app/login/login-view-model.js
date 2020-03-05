@@ -1,14 +1,16 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
-const topmost = require("tns-core-modules/ui/frame").topmost;
+const Frame = require("tns-core-modules/ui/frame");
 
 const userService = require("~/services/user-service");
 
 function LoginViewModel() {
     const viewModel = observableModule.fromObject({
         email: "user@nativescript.org",
-        password: "password",
-        confirmPassword: "",
+        password: "123",
+        confirmPassword: "123",
         isLoggingIn: true,
         processing: false,
 
@@ -34,7 +36,7 @@ function LoginViewModel() {
                 password: this.password
             }).then(() => {
                 this.set("processing", false);
-                topmost().navigate({
+                Frame.topmost().navigate({
                     moduleName: "/home/home-page",
                     clearHistory: true
                 });
@@ -45,8 +47,10 @@ function LoginViewModel() {
             });
         },
         register() {
-            if (this.password != this.confirmPassword) {
+            if (this.password !== this.confirmPassword) {
                 alert("Your passwords do not match.");
+                this.set("processing", false);
+
                 return;
             }
             userService.register({
@@ -57,10 +61,10 @@ function LoginViewModel() {
                 alert("Your account was successfully created. You can now login.");
                 this.isLoggingIn = true;
             })
-                .catch(() => {
-                    this.set("processing", false);
-                    alert("Unfortunately we were unable to create your account.");
-                });
+            .catch(() => {
+                this.set("processing", false);
+                alert("Unfortunately we were unable to create your account.");
+            });
         },
         forgotPassword() {
             dialogsModule.prompt({

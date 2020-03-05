@@ -1,35 +1,65 @@
-const Kinvey = require("kinvey-nativescript-sdk");
+/* global fetch */
+const config = require("../resources/config/config");
+
 
 function handleErrors(error) {
     console.log("error?");
-    console.error(error.message);
+    console.error(error);
 }
 
-exports.register = function (user) {
-    return new Promise((resolve, reject) => {
-        Kinvey.User.logout()
-            .then(() => {
-                Kinvey.User.signup({ username: user.email, password: user.password })
-                    .then(resolve)
-                    .catch((error) => { handleErrors(error); reject(); })
-            })
-            .catch((error) => { handleErrors(error); reject(); })
+exports.register = (user) => new Promise((resolve, reject) => {
+    this.logout();
+    fetch(`${config.apiUrl}/user/register?_format=json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: [user.email],
+            mail: [user.email],
+            pass: [user.password]
+        })
+    }).then((response) => {
+        if (response.status !== 200) {
+            console.log(response);
+            reject();
+        }
+        response.json();
+    })
+    .then(this.login(user))
+    .catch((error) => {
+        handleErrors(error);
+        reject();
     });
-};
+});
 
-exports.login = function (user) {
-    return new Promise((resolve, reject) => {
-        Kinvey.User.logout()
-            .then(() => {
-                Kinvey.User.login(user.email, user.password)
-                    .then(resolve)
-                    .catch((error) => { handleErrors(error); reject(); })
-            })
-            .catch((error) => { handleErrors(error); reject(); })
+exports.login = (user) => new Promise((resolve, reject) => {
+    this.logout();
+    fetch(`${config.apiUrl}/user/login?_format=json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: user.email,
+            pass: user.password
+        })
+    })
+    .then((response) => {
+        if (response.status !== 200) {
+            console.log(response);
+            reject();
+        }
+        response.json();
+    })
+    .then(resolve)
+    .catch((error) => {
+        handleErrors(error);
+        reject();
     });
-};
+});
 
-exports.resetPassword = function (email) {
-    return Kinvey.User.resetPassword(email)
-        .catch(handleErrors);
-}
+exports.logout = () => new Promise((resolve, reject) => {
+    fetch(`${config.apiUrl}/user/logout?_format=json`)
+    .then(resolve)
+    .catch((err) => {
+        handleErrors(err);
+        reject();
+    });
+});
