@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Fetch CocoaPods repository
           command: |
-            apt update -y && apt install -y curl wget
+            apt update -y && apt install -y curl wget git
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             # Fetch cocoapods specs from S3 instead of github
       - run:
