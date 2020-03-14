@@ -5,7 +5,7 @@ default_config: &default_config
     - image: ubuntu:bionic
   working_directory: ~/circleci/coffeelove
   environment:
-    ANDROID_HOME: "/usr/local/share/android-sdk"
+    ANDROID_HOME: "/usr/lib/android-sdk"
 
 jobs:
   build:
@@ -23,13 +23,21 @@ jobs:
           name: Setup system dependencies
           command: |
             apt update -y && apt install -y android-sdk
-            echo y | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-25" "build-tools;25.0.2" "extras;android;m2repository" "extras;google;m2repository"
+            cd $ANDROID_HOME
+            wget https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
+            unzip -o commandlinetools-linux-6200805_latest.zip
+            echo y | $ANDROID_HOME/tools/bin/sdkmanager  --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-25" "build-tools;25.0.2" "extras;android;m2repository" "extras;google;m2repository"
+            apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+            curl -sL https://deb.nodesource.com/setup_12.x | bash -
+            apt -y install nodejs gcc g++ make
+            cd ~/circleci/coffeelove
       - restore_cache:
           key: npm-cache-{{ checksum "./package-lock.json" }}
       - run:
           name: "Install node dependencies"
           command: |
             npm install
+            npm install -g nativescript
             npx tns usage-reporting disable
             npx tns error-reporting disable
       - save_cache:
