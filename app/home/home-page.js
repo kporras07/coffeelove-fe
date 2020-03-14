@@ -1,16 +1,20 @@
 const app = require("tns-core-modules/application");
 
 const HomeViewModel = require("./home-view-model");
+const homeViewModel = new HomeViewModel();
 
-function onNavigatingTo(args) {
+
+exports.onNavigatingTo = function(args) {
     const page = args.object;
-    page.bindingContext = new HomeViewModel();
-}
+    page.bindingContext = homeViewModel;
+};
 
-function onDrawerButtonTap(args) {
+exports.onPageLoaded = function (args) {
+  const page = args.object;
+  page.bindingContext = homeViewModel;
+};
+
+exports.onDrawerButtonTap = function(args) {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
-}
-
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
+};

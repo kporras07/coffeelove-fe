@@ -1,8 +1,9 @@
 <Page
-    navigatingTo="onNavigatingTo"  
+    navigatingTo="onNavigatingTo"
+    loaded="onPageLoaded"  
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
-    <ActionBar>
+    <ActionBar marginTop="-20">
         <!-- 
         Use the NavigationButton as a side-drawer button in Android
         because ActionItems are shown on the right side of the ActionBar
@@ -18,11 +19,17 @@
             tap="onDrawerButtonTap"
             ios.position="left">
         </ActionItem>
-        <Label text="Home"></Label>
+        <Label class="action-bar__label" textAlignment="center" text="CoffeeLove"></Label>
     </ActionBar>
 
-    <GridLayout class="page__content">
-        <Label class="page__content-icon fas" text="&#xf015;"></Label>
-        <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
-    </GridLayout>
+    <StackLayout class="homepage page__content">
+        <StackLayout class="page-intro">
+          <Image class="page-intro--image" src="~/resources/images/home-image.png" />
+          <Label class="page-intro--title h1" text="Welcome, John Doe"></Label>
+        </StackLayout>
+        <StackLayout class="page__actions">
+          <Button tap="{{ goToCupping }}" text="Cupping" class="homepage__button -primary -rounded-sm"></Button>
+          <Button tap="{{ goToBrewing }}" text="Brewing" class="homepage__button -primary -rounded-sm"></Button>
+        </StackLayout>
+    </StackLayout>
 </Page>

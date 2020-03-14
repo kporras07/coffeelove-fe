@@ -2,7 +2,7 @@
     navigatingTo="onNavigatingTo"  
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
-    <ActionBar>
+    <ActionBar marginTop="-20">
         <!-- 
         Use the NavigationButton as a side-drawer button in Android
         because ActionItems are shown on the right side of the ActionBar
@@ -18,11 +18,11 @@
             tap="onDrawerButtonTap"
             ios.position="left">
         </ActionItem>
-        <Label text="Browse"></Label>
+        <Label class="action-bar__label" textAlignment="center" text="CoffeeLove"></Label>
     </ActionBar>
 
     <GridLayout class="page__content">
-        <Label class="page__content-icon far" text="&#xf1ea;"></Label>
-        <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+        <Label class="page__content-icon fas" text="&#xf005;"></Label>
+        <Label class="page__content-placeholder" text="<!-- Cupping Page content goes here -->"></Label>
     </GridLayout>
 </Page>

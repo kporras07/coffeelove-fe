@@ -1,10 +1,10 @@
 const app = require("tns-core-modules/application");
 
-const FeaturedViewModel = require("./featured-view-model");
+const CuppingViewModel = require("./cupping-view-model");
 
 function onNavigatingTo(args) {
     const page = args.object;
-    page.bindingContext = new FeaturedViewModel();
+    page.bindingContext = new CuppingViewModel();
 }
 
 function onDrawerButtonTap(args) {

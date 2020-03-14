@@ -1,5 +1,5 @@
 @import "~@nativescript/theme/core";
-@import "~@nativescript/theme/forest";
+@import "~@nativescript/theme/brown";
 
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
@@ -20,6 +20,12 @@
     font-weight: 400;
 }
 
+// Variables.
+$font-size-normal: 16;
+$font-size-large: 24;
+$color-primary: #FFF;
+
+
 // Common page class
 .page__content {
     &-icon,
@@ -37,9 +43,19 @@
     }
 }
 
+.action-bar__label {
+    margin-top: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #FFF;
+    font-size: $font-size-large;
+}
+
 // Drawer navigation custom styles
 .nt-drawer__header-image {
     color: const(grey);
 }
 
 @import 'login/login-page';
+@import 'home/home-page';
+@import 'app-root/app-root';

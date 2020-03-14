@@ -1,10 +1,10 @@
 const app = require("tns-core-modules/application");
 
-const BrowseViewModel = require("./browse-view-model");
+const BrewingViewModel = require("./brewing-view-model");
 
 function onNavigatingTo(args) {
     const page = args.object;
-    page.bindingContext = new BrowseViewModel();
+    page.bindingContext = new BrewingViewModel();
 }
 
 function onDrawerButtonTap(args) {
