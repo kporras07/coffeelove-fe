@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Setup system dependencies
           command: |
-            sudo apt update -y && sudo apt install -y android-sdk
+            apt update -y && apt install -y android-sdk
             echo y | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-25" "build-tools;25.0.2" "extras;android;m2repository" "extras;google;m2repository"
       - restore_cache:
           key: npm-cache-{{ checksum "./package-lock.json" }}
