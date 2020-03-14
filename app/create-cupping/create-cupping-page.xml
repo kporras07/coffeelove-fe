@@ -1,0 +1,44 @@
+<Page
+    loaded="onPageLoaded"
+    xmlns:lv="nativescript-ui-listview"
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar>
+        <!-- 
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" tap="onDrawerButtonTap"></NavigationButton>
+        <!-- 
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem icon="res://menu" 
+            android:visibility="collapsed" 
+            tap="onDrawerButtonTap"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar__label" textAlignment="center" text="CoffeeLove"></Label>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="page__content page__cupping nt-form">
+            <TextField hint="Enter session title" class="nt-input -border" text="{{ title }}" required="required" />
+            <TextField hint="Enter session description" class="nt-input -border" text="{{ description }}" required="required" />
+            <TextField hint="Enter cups per sample" class="nt-input -border" text="{{ cupsPerSample }}" keyboardType="integer" required="required" />
+            <TextField hint="Enter sample name" class="nt-input -border" text="{{ sampleName }}" required="required" id="sampleName" />
+            <Button class="-secondary -rounded-sm" text="Add Sample Name" tap="{{ addSampleName }}" ></Button>
+            <Label class="sample-names__label" textAlignment="left" text="Sample Names"></Label>
+            <lv:RadListView items="{{ sampleNames }}" row="1">
+                <lv:RadListView.itemTemplate>
+                    <GridLayout class="sample-names">
+                        <Label class="p-15" text="{{ value }}"/>
+                    </GridLayout>
+                </lv:RadListView.itemTemplate>
+            </lv:RadListView>
+            <Button class="-primary -rounded-sm" text="Create Cupping Session" tap="{{ createCuppingSession }}"></Button>
+        </StackLayout>
+    </ScrollView>
+
+</Page>

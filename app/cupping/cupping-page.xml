@@ -1,5 +1,5 @@
 <Page
-    navigatingTo="onNavigatingTo"  
+    loaded="onPageLoaded"
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar>
@@ -21,8 +21,13 @@
         <Label class="action-bar__label" textAlignment="center" text="CoffeeLove"></Label>
     </ActionBar>
 
-    <GridLayout class="page__content">
-        <Label class="page__content-icon fas" text="&#xf005;"></Label>
-        <Label class="page__content-placeholder" text="<!-- Cupping Page content goes here -->"></Label>
-    </GridLayout>
+    <StackLayout class="page__content page__cupping nt-form">
+        <TextField hint="Enter session id" class="nt-input -border" text="{{ sessionId }}" />
+        <Button class="-primary -rounded-sm" text="Join Session" tap="{{ joinSession }}"></Button>
+        <Label class="-primary create-session__label" tap="{{ createSession }}">
+            <FormattedString>
+                <Span text="Create cupping session" />
+            </FormattedString>
+        </Label>
+    </StackLayout>
 </Page>

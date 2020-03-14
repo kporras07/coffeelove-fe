@@ -1,6 +1,5 @@
 <Page
     actionBarHidden="true"
-    navigatingTo="onNavigatingTo" 
     loaded="onPageLoaded" 
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
