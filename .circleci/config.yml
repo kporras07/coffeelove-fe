@@ -1,0 +1,72 @@
+version: 2
+
+default_config: &default_config
+  docker:
+    - image: ubuntu:bionic
+  working_directory: ~/circleci/coffeelove
+  environment:
+    ANDROID_HOME: "/usr/local/share/android-sdk"
+
+jobs:
+  build:
+    <<: *default_config
+    steps:
+      - checkout
+      - add_ssh_keys
+      - run:
+          name: Fetch CocoaPods repository
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            # Fetch cocoapods specs from S3 instead of github
+      - run:
+          name: Setup system dependencies
+          command: |
+            sudo apt update -y && sudo apt install -y android-sdk
+            echo y | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-25" "build-tools;25.0.2" "extras;android;m2repository" "extras;google;m2repository"
+      - restore_cache:
+          key: npm-cache-{{ checksum "./package-lock.json" }}
+      - run:
+          name: "Install node dependencies"
+          command: |
+            npm install
+            npx tns usage-reporting disable
+            npx tns error-reporting disable
+      - save_cache:
+          key: npm-cache-{{ checksum "./package-lock.json" }}
+          paths:
+            - ~/.npm
+      - run:
+          name: "Rebuild Node SASS bindings"
+          command: npm rebuild node-sass --force
+      - run:
+          name: "Prepare Android"
+          command: npx tns prepare android
+      - run:
+          name: "Build Android"
+          command: |
+            ./scripts/build_android.sh
+      - persist_to_workspace:
+          root: ~/circleci
+          paths:
+            - coffeelove
+
+  deploy:
+    <<: *default_config
+    steps:
+      - attach_workspace:
+          at: ~/circleci
+      - run:
+          name: "Deploy"
+          command: |
+            npx tns usage-reporting disable
+            npx tns error-reporting disable
+            ./scripts/deploy.sh
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
