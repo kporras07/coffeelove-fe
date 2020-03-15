@@ -1,6 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const dialogsModule = require("tns-core-modules/ui/dialogs");
+const Frame = require("tns-core-modules/ui/frame");
 
 const SelectedPageService = require("../shared/selected-page-service");
 const userService = require("~/services/user-service");
@@ -46,10 +47,10 @@ function CreateCuppingViewModel() {
                     if (json.field_session_id[0].value) {
                         console.log(json.field_session_id[0].value, 'SESSION ID');
                     }
-                    /*Frame.topmost().navigate({
-                        moduleName: "/home/home-page",
+                    Frame.topmost().navigate({
+                        moduleName: "/cupping-sheet/cupping-sheet-page",
                         clearHistory: true
-                    });*/
+                    });
                 }).catch((e) => {
                     console.log(e);
                 });
