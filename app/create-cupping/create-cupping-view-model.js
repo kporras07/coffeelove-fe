@@ -45,12 +45,14 @@ function CreateCuppingViewModel() {
                     sampleNames: this.sampleNames._array
                 }, csrfToken).then((json) => {
                     if (json.field_session_id[0].value) {
-                        console.log(json.field_session_id[0].value, 'SESSION ID');
+                        Frame.topmost().navigate({
+                            moduleName: "/cupping-sheet/cupping-sheet-page",
+                            context: {
+                                sessionId: json.field_session_id[0].value
+                            }
+                        });
                     }
-                    Frame.topmost().navigate({
-                        moduleName: "/cupping-sheet/cupping-sheet-page",
-                        clearHistory: true
-                    });
+                    
                 }).catch((e) => {
                     console.log(e);
                 });

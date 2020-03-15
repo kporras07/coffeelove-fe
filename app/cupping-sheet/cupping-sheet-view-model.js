@@ -17,7 +17,7 @@ function CuppingSheetViewModel() {
 
     const viewModel = observableModule.fromObject({
         /* Add your view model properties here */
-        sessionId: "xxfdf5fgfg",
+        sessionId: "",
         joinSession() {
             console.log("SESSION ID: " + this.sessionId);
         },

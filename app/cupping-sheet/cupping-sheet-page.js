@@ -6,6 +6,8 @@ const cuppingSheetViewModel = new CuppingSheetViewModel();
 exports.onPageLoaded = function (args) {
   const page = args.object;
   page.bindingContext = cuppingSheetViewModel;
+  const navigationContext = page.navigationContext;
+  page.bindingContext.sessionId = navigationContext.sessionId;
 };
 
 exports.onDrawerButtonTap = function(args) {
