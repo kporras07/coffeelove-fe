@@ -24,9 +24,13 @@
 
     <ScrollView>
         <StackLayout class="page__content page__cupping nt-form">
+            <Label class="session-create-label" text="Session Title" />
             <TextField hint="Enter session title" class="nt-input -border" text="{{ title }}" required="required" />
+            <Label class="session-create-label" text="Session Description" />
             <TextField hint="Enter session description" class="nt-input -border" text="{{ description }}" required="required" />
+            <Label class="session-create-label" text="Cups per Sample" />
             <TextField hint="Enter cups per sample" class="nt-input -border" text="{{ cupsPerSample }}" keyboardType="integer" required="required" />
+            <Label class="session-create-label" text="Session Sample" />
             <TextField hint="Enter sample name" class="nt-input -border" text="{{ sampleName }}" required="required" id="sampleName" />
             <Button class="-secondary -rounded-sm" text="Add Sample Name" tap="{{ addSampleName }}" ></Button>
             <Label class="sample-names__label" textAlignment="left" text="Sample Names"></Label>

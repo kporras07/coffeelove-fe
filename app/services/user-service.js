@@ -55,6 +55,26 @@ exports.login = (user) => new Promise((resolve, reject) => {
     });
 });
 
+exports.getXCSRFToken = () => new Promise((resolve, reject) => {
+    fetch(`${config.apiUrl}/session/token`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
+    .then((response) => {
+        if (response.status !== 200) {
+            console.log(response);
+            reject();
+        }
+
+        return response.text();
+    })
+    .then(resolve)
+    .catch((error) => {
+        handleErrors(error);
+        reject();
+    });
+});
+
 exports.logout = () => new Promise((resolve, reject) => {
     fetch(`${config.apiUrl}/user/logout?_format=json`)
     .then(resolve)

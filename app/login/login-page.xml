@@ -11,6 +11,7 @@
 
                 <GridLayout rows="auto, auto, auto">
                     <StackLayout row="0" class="input-field">
+                        <Label class="login-field-label email-label" text="Email" />
                         <TextField class="input" text="{{ email }}" hint="Email"
                             keyboardType="email" autocorrect="false"
                             autocapitalizationType="none" returnKeyType="next" />
@@ -19,6 +20,7 @@
                     </StackLayout>
 
                     <StackLayout row="1" class="input-field">
+                       <Label class="login-field-label password-label" text="Password" />
                        <TextField id="password" class="input" text="{{ password }}"
                             hint="Password" secure="true" returnKeyType="{{ isLoggingIn ? 'done' : 'next' }}" />
                         <Label class="hr-light" />

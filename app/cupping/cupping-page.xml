@@ -22,6 +22,7 @@
     </ActionBar>
 
     <StackLayout class="page__content page__cupping nt-form">
+        <Label class="session-id-label" text="Session Id" />
         <TextField hint="Enter session id" class="nt-input -border" text="{{ sessionId }}" />
         <Button class="-primary -rounded-sm" text="Join Session" tap="{{ joinSession }}"></Button>
         <Label class="-primary create-session__label" tap="{{ createSession }}">

@@ -3,6 +3,9 @@ const ObservableArray = require("tns-core-modules/data/observable-array").Observ
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
 const SelectedPageService = require("../shared/selected-page-service");
+const userService = require("~/services/user-service");
+const cuppingService = require("~/services/cupping-service");
+
 
 function CreateCuppingViewModel() {
     SelectedPageService.getInstance().updateSelectedPage("Cupping");
@@ -13,9 +16,7 @@ function CreateCuppingViewModel() {
         description: "Description",
         cupsPerSample: 5,
         sampleNames: new ObservableArray([
-            { value: "Apples" },
-            { value: "Bananas" },
-            { value: "Oranges" }
+            { "value": "My val1" }
         ]),
         sampleName: "",
         addSampleName() {
@@ -35,7 +36,24 @@ function CreateCuppingViewModel() {
             this.sampleName = "";
         },
         createCuppingSession() {
-
+            userService.getXCSRFToken().then((csrfToken) => {
+                cuppingService.createCuppingSession({
+                    title: this.title,
+                    description: this.description,
+                    cupsPerSample: this.cupsPerSample,
+                    sampleNames: this.sampleNames._array
+                }, csrfToken).then((json) => {
+                    if (json.field_session_id[0].value) {
+                        console.log(json.field_session_id[0].value, 'SESSION ID');
+                    }
+                    /*Frame.topmost().navigate({
+                        moduleName: "/home/home-page",
+                        clearHistory: true
+                    });*/
+                }).catch((e) => {
+                    console.log(e);
+                });
+            });
         }
     });
 
